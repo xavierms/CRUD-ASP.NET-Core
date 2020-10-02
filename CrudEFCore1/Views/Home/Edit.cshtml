@@ -1,0 +1,59 @@
+﻿@model CrudEFCore1.Models.Usuario
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Agenda</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="float-right">
+            <a asp-action="Create" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i> New Contact</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card border">
+            <div class="card-header">
+                <h3><strong>Edit contact</strong></h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <input type="hidden"  value="Id" />
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefono" class="control-label"></label>
+                    <input asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Celular" class="control-label"></label>
+                    <input asp-for="Celular" class="form-control" />
+                    <span asp-validation-for="Celular" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-user"></i>Edit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to list</a>
+</div>
+
+

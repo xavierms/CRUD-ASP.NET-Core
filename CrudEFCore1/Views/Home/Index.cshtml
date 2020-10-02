@@ -1,0 +1,107 @@
+﻿@model IEnumerable<CrudEFCore1.Models.Usuario>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Agenda</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="float-right">
+            <a asp-action="Create" asp-controller="Home" class="btn btn-success"><i class="fas fa-plus"></i> New Contact</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card border">
+            <div class="card-header">
+                <h3><strong>Contact List</strong></h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @if (Model.Count() > 0)
+                {
+                    <table class="table table-bordered" id="tablaUsuarios" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.Nombre)</th>
+                                <th>@Html.DisplayNameFor(m => m.Telefono)</th>
+                                <th>@Html.DisplayNameFor(m => m.Celular)</th>
+                                <th>@Html.DisplayNameFor(m => m.Email)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    @*displayfor muestra la informacion del campo, y displaynamefor solo el nombre*@
+
+                                    <td>@Html.DisplayFor(m => item.Nombre)</td>
+                                    <td>@Html.DisplayFor(m => item.Telefono)</td>
+                                    <td>@Html.DisplayFor(m => item.Celular)</td>
+                                    <td>@Html.DisplayFor(m => item.Email)</td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalis</a>
+                                        <a class="btn btn-danger" onclick="return  DeleteConfirm()"  asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>No records</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //llamar a datatable
+            $('#tablaUsuarios').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "Showing 0 to 0 of 0 entries",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": "Next",
+                        "previous": "Previous"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }
+            });
+        });
+    </script>
+ 
+    <script type="text/javascript">
+        //muestra confirmacion para eliminar
+        function DeleteConfirm() {
+            if (confirm("Quieres Eliminar el Registro"))
+                return true;
+            else
+                return false;
+        }
+    </script>
+}
+
